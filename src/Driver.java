@@ -11,17 +11,17 @@ public class Driver extends Person {
     }
 
     //getters and setters
-    public void setBike(Bike newBike){this.car = newCar;}
+    public void setBike(Bike newBike){this.bike = newBike;}
 
     public void setlicenseID(String newLicenseID){this.licenseID = newLicenseID;}
 
-    public Car getBike(){return this.bike;}
+    public Bike getBike(){return this.bike;}
 
     public String getlicenseID(){return  this.licenseID;}
 
-    public String setPickUp(String newPickUp){ this.pickUp = newPickUp;}
+    public void setPickUp(String newPickUp){ this.pickUp = newPickUp;}
 
-    public String setDropOff(String newDropOff){ this.dropOff = newDropOff;}
+    public void setDropOff(String newDropOff){ this.dropOff = newDropOff;}
 
     public String toString(){return super.toString() + " and I am your food delivery driver";}
 }
