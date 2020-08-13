@@ -1,31 +1,80 @@
+public class Customer {
 
-public class Customer extends Person {
+    //Fields:
+    private String name;
+    private String surname;
+    private String phone_number;
+    private String address;
+    private String postal_code;
+    private double cash;
 
-    String email;
-    String address;
-
-    Customer(String email, String name, String surname,String phone_number, double cash,String address){
-        super(name,surname,phone_number, cash); 
-        this.email = email;
+    //Constructor
+    Customer(String name, String surname, String phone_number, String address, String postal_code, double cash) {
+        this.name = name;
+        this.surname = surname;
+        this.phone_number = phone_number;
         this.address = address;
+        this.postal_code = postal_code;
+        this.cash = cash;
+
     }
 
-    public void Pay(double cash){
-        if(order == "placed"){ //once order placed from the app , don't know how the order is placed from persob working on the main app
-            cash -= getCost; //we subtract customer cash that way they payed
-        }
-    } 
+    //Setters
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setEmail(String newEmail){this.email  = newEmail;}
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-    public void setAddress(String newAddress){this.address = newAddress;}
+    public void setPhoneNumber(String phone_number) {
+        this.phone_number = phone_number;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
 
-    public String getEmail() {return this.email;}
+    }
 
-    public String getAddress(){return this.address}
+    public void setPostalCode(String postal_code) {
+        this.postal_code = postal_code;
 
-    public String toString(){
-        return super.toString() + " and I am a customer";
-    }   
+    }
 
+    public void setCash(double cash) {
+        this.cash = cash;
+    }
+
+    //Getters
+    public String getName(){
+        return name;
+    }
+
+    public String getSurname(){
+        return surname;
+    }
+    
+    public String getPhoneNumber(){
+        return phone_number;
+    
+    }
+
+    public String getAddress(){
+        return address;
+
+    }
+
+    public String getPostalCode(){
+        return postal_code;
+
+    }
+    
+    public double getCash(){
+        return cash;
+    }
+
+    public String toString() {
+        return name + " " + surname;
+    }
 }
