@@ -20,6 +20,7 @@ public class Customer extends Person {
     public String displayOrder(){
         return getOrder();
     }
+    public Dish getOrder(){return dish;}
 
 
 
