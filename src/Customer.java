@@ -1,80 +1,56 @@
-public class Customer {
+import java.util.*;
+public class Customer extends Person {
+    
+    public static void main(String args[]){
+        ArrayList<String> alist=new ArrayList<String>();
+        alist.add("Signituredish1");
+        alist.add("Signaturedish2");
+        alist.add("Signaturedish3");
+        
+        // diplaying elements
+        System.out.println(alist);
 
-    //Fields:
-    private String name;
-    private String surname;
-    private String phone_number;
-    private String address;
-    private String postal_code;
-    private double cash;
+        //removing "dish"
+        alist.remove("Dish");
 
-    //Constructor
-    Customer(String name, String surname, String phone_number, String address, String postal_code, double cash) {
-        this.name = name;
-        this.surname = surname;
-        this.phone_number = phone_number;
+        //this will add "order/basket" at the end of list
+        alist.add("oder/basket");
+
+        //display elements
+        System.out.println(alist);
+
+    }
+    //instance variables
+    String address;
+
+    //constructor
+    Customer(String address, String name, String surname,String phone_number, double cash){
+        super(name,surname,phone_number, cash) {
         this.address = address;
-        this.postal_code = postal_code;
-        this.cash = cash;
-
     }
 
-    //Setters
-    public void setName(String name) {
-        this.name = name;
+    //methods
+
+    public void setAddress(String address){
+        this.address  = address;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public String getaddress() {
+        return this.address;
     }
 
-    public void setPhoneNumber(String phone_number) {
-        this.phone_number = phone_number;
-    }
-    
-    public void setAddress(String address) {
-        this.address = address;
-
-    }
-
-    public void setPostalCode(String postal_code) {
-        this.postal_code = postal_code;
-
-    }
-
-    public void setCash(double cash) {
-        this.cash = cash;
-    }
-
-    //Getters
-    public String getName(){
-        return name;
-    }
-
-    public String getSurname(){
-        return surname;
-    }
-    
-    public String getPhoneNumber(){
-        return phone_number;
-    
-    }
-
-    public String getAddress(){
-        return address;
-
-    }
-
-    public String getPostalCode(){
-        return postal_code;
+    public void setOrder(String oder){
+        this.order = order;
 
     }
     
-    public double getCash(){
-        return cash;
+    public String getDish() {
+        return this.dish;
+
     }
 
-    public String toString() {
-        return name + " " + surname;
+    public String toString(){
+        return super.toString() + " and I am a customer";
+
     }
-}
+
