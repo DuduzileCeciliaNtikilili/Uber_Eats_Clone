@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Ontefetse Ditsele
@@ -8,34 +12,55 @@ import java.io.*;
  */
 
 public class Database {
-    
-    //Instance Variables
-    private BufferedReader read;
-    private FileWriter write;
+    protected static ArrayList<Restaurant> resList = new ArrayList<Restaurant>();
+    protected static ArrayList<Restaurant> local = new ArrayList<Restaurant>();    
+    private Database(){     }
 
-    public Database(){ }
-
-    public void readRestaurants(){
+    public static void readRestaurants() throws IOException{
         try {
-            read = new BufferedReader(new FileReader("./bin/restos.csv"));
+            BufferedReader read = new BufferedReader(new FileReader("../bin/restos.csv"));
             String line; Dish[] sigD = new Dish[3];
             String[] data; int z = 0;
             read.readLine();
             while((line = read.readLine()) != null){
                 data = line.split(",");
-                //if(location.equals(data[7])){
                 for(int i = 1; i < 6;i+=2){
-                    sigd[z] = new Dish(data[i],data[i+1]);
+                    sigD[z] = new Dish(data[i],Integer.parseInt(data[i+1]));
                     z++;
                 }
                 Restaurant r = new Restaurant(data[0], sigD, data[7]);
-                this.restaurantList.add(r);
-                
+                resList.add(r);
             }
-
-        } catch (IOException e) {
-            
+            read.close();
+        }catch (Exception e) {
+            System.out.println("Error to " + e.getMessage());
         }
     }
-    
+    public static void writeOrder(Restaurant r) throws IOException{
+      try{
+        FileWriter write = new FileWriter("../bin/orders.csv",true);
+         write.write("name, itemsOrdered, location\n");
+         for(Dish d : r.getOrderedCart()){
+                write.write(r.getName() + ",");
+                write.write(d.getName() + ",");
+                write.write(r.getLocation()+"\n");
+            }
+        write.close();
+        }catch(IOException e){
+                System.out.println("Error "+ e.getMessage());
+        }
+    }
+
+	public static void local(String location) {
+        local.clear();
+        for(Restaurant r : resList){
+            if (location.equals(r.getLocation())){
+                local.add(r);
+                System.out.println(r);
+            }
+        }
+    }
+	public static Restaurant get(int selection) {
+		return local.get(--selection);
+	}
 }

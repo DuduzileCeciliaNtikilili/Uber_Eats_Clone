@@ -7,63 +7,59 @@ import java.util.ArrayList;
 
 public class Restaurant implements UberEatsResturant {
     private String name;
+    private double Account;
     private Dish[] signatureDishes;
     private String location;
-
-    //Ideal a hash map to have cd 
-    private ArrayList<Dish> cart; 
+ 
     private Customer client;
+    private double cost;
     
     public Restaurant(String name, Dish[] sigDishes,String location){
         this.name = name;
         this.signatureDishes = sigDishes;
-        this.cart = new ArrayList<Dish>();
         this.location = location;
-
+         this.cost = 0.95;
     }
     public void setClient(Customer client) {
         this.client = client;
     }
-
-    // Implemtented Methods
-    @Override
-    public Dish[] getSignatureDishes() {
-        return this.signatureDishes;
+    public double getCost() {
+        return this.cost;
     }
-
+    // Implemtented METHODS To be a Uber Eats Resturant.
     @Override
-    public String getLocation() {
-        return this.location;
-    }
+    public Dish[] getSignatureDishes() {  return this.signatureDishes;    }
 
     @Override
-    public String getName() {
-        return this.name;
-    }
+    public String getLocation() {    return this.location;   }
+
+    @Override
+    public String getName() {   return this.name;   }
+    
     //Class Methods
-    //This fuction will be in Customer, thus might remove it
-    public void addDish(Dish d) {
-        this.cart.add(d);
-    }
-    public void removeDish(Dish d) {
-        this.cart.remove(d);
-    }
-    .
-    public void displayCart(){
-        for (Dish d : this.cart){
-            System.out.println(d);
+    public void displayMenu() {
+        for (int i = 1; i < 4; i++){
+            System.out.println(i+".  "+ signatureDishes[i-1]);
         }
     }
+    public ArrayList<Dish> getOrderedCart(){
+        return client.getOrder();
+    }
+    public void calculateCost (){
+        for(Dish d : client.getOrder()){
+        this.cost += d.getCost();
+        }
+    }
+
     public void checkout(){
-        /*
-        * assing a delivry boy .Driver delivery_boy = new Driver()
-        */
-        Driver delivery_boy = new Driver("John","Doe","johndoe@hotmail.com",7000,this.location, client.getAddress());
-        /* process payment, 
-            - charge the customer, pay the driver & update account.
-        *display the basket
-        *& give an E.T.A
-        */
-    
+        int fee = 50;
+        Driver delivery_boy = new Driver("licenseId","John","Doe","065 789 4433",7000);
+        delivery_boy.setPickUp(this.location);
+        delivery_boy.setDropOff(client.getAddress());
+        
+        client.setCash(client.getCash() - this.cost);
+        this.Account += this.cost - fee; //R 50 Delivery Fee        
+        delivery_boy.setCash(7000 + fee);    
+        System.out.println(delivery_boy);
     }
 }
